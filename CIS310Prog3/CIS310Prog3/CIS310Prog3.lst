@@ -1,0 +1,94 @@
+Microsoft (R) Macro Assembler Version 14.00.24210.0	    03/04/17 16:15:51
+grades.asm						     Page 1 - 1
+
+
+				; grades.asm - This program will assign a grade, depending on how many points were obtained.
+				; Evan Joseph, Program 3, 3/6/2017
+
+				.386
+				.model flat,stdcall
+				.stack 4096
+				ExitProcess proto,dwExitCode:dword
+
+ 00000000			.data
+ 00000000 5A			ascore BYTE 90
+ 00000001 50			bscore BYTE 80
+ 00000002 46			cscore BYTE 70
+ 00000003 3C			dscore BYTE 60
+ 00000004 5B			myscore BYTE 91			;can change this to any score to test
+ 00000005 00			mygrade BYTE ?
+
+ 00000000			.code
+ 00000000			main proc
+ 00000000  83 E0 00		and eax,0				;clears eax to 0, makes it more readable
+ 00000003  A0 00000004 R	mov al,myscore
+				.IF al>=ascore
+ 00000010  C6 05 00000005 R		mov mygrade,10
+	   0A
+ 00000017  A0 00000005 R		mov al,mygrade
+				.ELSEIF al >=bscore && al <ascore
+ 0000002E  C6 05 00000005 R		mov mygrade,11
+	   0B
+ 00000035  A0 00000005 R		mov al,mygrade
+				.ELSEIF al >=cscore && al <bscore
+ 0000004C  C6 05 00000005 R		mov mygrade,12
+	   0C
+ 00000053  A0 00000005 R		mov al,mygrade
+				.ELSEIF al >=dscore && al <cscore
+ 0000006A  C6 05 00000005 R		mov mygrade,13
+	   0D
+ 00000071  A0 00000005 R		mov al,mygrade
+				.ELSE
+ 00000078  C6 05 00000005 R		mov mygrade,14
+	   0E
+ 0000007F  A0 00000005 R		mov al,mygrade
+				.ENDIF
+					invoke ExitProcess,0
+ 0000008B			main endp
+				end main
+Microsoft (R) Macro Assembler Version 14.00.24210.0	    03/04/17 16:15:51
+grades.asm						     Symbols 2 - 1
+
+
+
+
+Segments and Groups:
+
+                N a m e                 Size     Length   Align   Combine Class
+
+FLAT . . . . . . . . . . . . . .	GROUP
+STACK  . . . . . . . . . . . . .	32 Bit	 00001000 DWord	  Stack	  'STACK'	 
+_DATA  . . . . . . . . . . . . .	32 Bit	 00000006 DWord	  Public  'DATA'	
+_TEXT  . . . . . . . . . . . . .	32 Bit	 0000008B DWord	  Public  'CODE'	
+
+
+Procedures, parameters, and locals:
+
+                N a m e                 Type     Value    Attr
+
+ExitProcess  . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
+main . . . . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 0000008B Public STDCALL
+
+
+Symbols:
+
+                N a m e                 Type     Value    Attr
+
+@CodeSize  . . . . . . . . . . .	Number	 00000000h   
+@DataSize  . . . . . . . . . . .	Number	 00000000h   
+@Interface . . . . . . . . . . .	Number	 00000003h   
+@Model . . . . . . . . . . . . .	Number	 00000007h   
+@code  . . . . . . . . . . . . .	Text   	 _TEXT
+@data  . . . . . . . . . . . . .	Text   	 FLAT
+@fardata?  . . . . . . . . . . .	Text   	 FLAT
+@fardata . . . . . . . . . . . .	Text   	 FLAT
+@stack . . . . . . . . . . . . .	Text   	 FLAT
+ascore . . . . . . . . . . . . .	Byte	 00000000 _DATA	
+bscore . . . . . . . . . . . . .	Byte	 00000001 _DATA	
+cscore . . . . . . . . . . . . .	Byte	 00000002 _DATA	
+dscore . . . . . . . . . . . . .	Byte	 00000003 _DATA	
+mygrade  . . . . . . . . . . . .	Byte	 00000005 _DATA	
+myscore  . . . . . . . . . . . .	Byte	 00000004 _DATA	
+
+	   0 Warnings
+	   0 Errors
